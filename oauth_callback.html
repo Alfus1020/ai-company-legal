@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OAuth Callback</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 600px; margin: 60px auto; padding: 0 16px; line-height: 1.8; color: #222; }
+  code { display: block; padding: 16px; background: #f2f2f7; border-radius: 8px; word-break: break-all; font-size: 1em; margin-top: 16px; }
+  button { margin-top: 12px; padding: 8px 16px; border-radius: 6px; border: none; background: #a78bfa; color: #fff; cursor: pointer; }
+</style>
+</head>
+<body>
+<h1>認証コード</h1>
+<p>以下のコードをコピーして、指示された場所に貼り付けてください。</p>
+<code id="code">(コードが見つかりません)</code>
+<button onclick="copyCode()">コピー</button>
+<p id="status"></p>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get("code");
+  if (code) {
+    document.getElementById("code").textContent = code;
+  }
+  function copyCode() {
+    const text = document.getElementById("code").textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      document.getElementById("status").textContent = "コピーしました。";
+    });
+  }
+</script>
+</body>
+</html>
